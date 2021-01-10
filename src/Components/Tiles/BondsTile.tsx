@@ -7,7 +7,7 @@ import { FontFamilies } from 'src/Styles/Fonts';
 // TODO: make this container be possibly white
 // It is container for 1 investment type
 const TileContainer = styled(FlexColumn)`
-  background-color: #FFE2A9;
+  background-color: #f9cfcf; 
   justify-content: space-between;
   padding: ${Margins.Large}px ${Margins.XLarge}px;
   margin: 20px;
@@ -37,7 +37,7 @@ const BondsTile = () => (
     </OneInvestment>
     <OneInvestment>
       <TextLine>Bond B</TextLine>
-      <TextLine>This bond can be redeemed now! Click redeem.</TextLine>
+      <TextLine>This bond can be redeemed now!</TextLine>
     </OneInvestment>
   </TileContainer>
 );

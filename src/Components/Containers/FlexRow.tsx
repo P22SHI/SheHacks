@@ -5,7 +5,7 @@ const FlexRow = styled.div`
 	flex-direction: row;
 	flex-basis: 0px;
 	flex-grow: 1;
-	flex-shrink: 1;
+  flex-shrink: 1;
 	box-sizing: border-box;
 	flex-wrap: nowrap;
 `;

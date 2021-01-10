@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import FlexRow from 'src/Components/Containers/FlexRow';
 import FlexColumn from 'src/Components/Containers/FlexColumn';
-import One from 'src/Assets/Images/step1.svg';
+import EmptyRoom from 'src/Assets/Images/EmptyRoom.svg';
 import Two from 'src/Assets/Images/step2.svg';
 import Three from 'src/Assets/Images/step3.svg';
 import Four from 'src/Assets/Images/step4.svg';
@@ -14,7 +14,7 @@ import Ten from 'src/Assets/Images/step10.svg';
 import Eleven from 'src/Assets/Images/step11.svg';
 import Twelve from 'src/Assets/Images/step12.svg';
 import Thirteen from 'src/Assets/Images/step13.svg';
-import Fourteen from 'src/Assets/Images/step14.svg';
+import Fourteen from 'src/Assets/Images/step14.png';
 
 type Props = {
 	imagenumber: number,
@@ -31,9 +31,9 @@ const ImageContainer = styled(FlexColumn)`
 
 //This is a functional component
 const BedroomScene = (props: Props) => {
-  var imagepath = One;
+  var imagepath = EmptyRoom;
   switch (props.imagenumber) {
-    case 1: imagepath = One; break;
+    case 1: imagepath = EmptyRoom; break;
     case 2: imagepath = Two; break;
     case 3: imagepath = Three; break;
     case 4: imagepath = Four; break;

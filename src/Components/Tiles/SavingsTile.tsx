@@ -42,7 +42,8 @@ type Props = {
 type State = {
   balance: number;
   transactionAmount: number;
-  transactionType: Transaction | null
+  transactionType: Transaction | null;
+  interestAmount: number
 };
 
 enum Transaction {
@@ -54,24 +55,26 @@ export default class SavingsTile extends React.Component<Props, State>{
   state: State = {
     balance: 0,
     transactionAmount: 0,
-    transactionType: null
+    transactionType: null,
+    interestAmount: 0
   };
   
 	render() {
 		return (
       <TileContainer>
-        <TileTitle>My Savings</TileTitle>
-        <TextLine>Savings Balance: {formatAsMoney(this.state.balance)}</TextLine>
-        <TextLine>Monthly Interest Rate: 10%</TextLine>
+        <TileTitle style={{textAlign: 'center'}}>My Savings Account</TileTitle>
+        <hr></hr>
+        <TextLine style={{textAlign: 'center'}}>Balance: {formatAsMoney(this.state.balance)}</TextLine>
+        <TextLine style={{textAlign: 'center'}}>Monthly Interest Rate: 10%</TextLine>
         <ButtonRow>
-          <SmallButton onClick={this.onClickWithdraw} text="Withdraw" color="beige"></SmallButton>
+          <SmallButton onClick={this.onClickWithdraw} text="Withdraw" color='#fff5ec'></SmallButton>
           {
             this.state.transactionType && 
-              <form onSubmit={this.onSubmitTransaction}>
+              <form autoComplete='off' onSubmit={this.onSubmitTransaction}>
                 <TextLineInput onChange={this.onChangeTransactionAmount} type="text" name="name" />
               </form>
           }
-          <SmallButton onClick={this.onClickDeposit} text="Deposit" color="beige"></SmallButton>
+          <SmallButton onClick={this.onClickDeposit} text="Deposit" color='#fff5ec'></SmallButton>
         </ButtonRow>
       </TileContainer>
 		);

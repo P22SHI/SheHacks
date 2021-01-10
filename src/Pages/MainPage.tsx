@@ -17,10 +17,13 @@ import disabledShop from 'src/Assets/Images/DisabledShop.svg';
 import shopButton from 'src/Assets/Images/shopButton.svg';
 import BaseButton from 'src/Components/Buttons/BaseButton';
 import TextLine from 'src/Components/Texts/TextLine';
+import StartScene from 'src/Components/Scenes/StartScene';
+import NewBikeScene from 'src/Components/Scenes/NewBikeScene';
 
 enum Scene {
 	Bedroom = 'Bedroom',
-	Portfolio = 'Portfolio',
+  Portfolio = 'Portfolio',
+  NewBike = 'NewBike'
 };
 
 type State = {
@@ -28,20 +31,29 @@ type State = {
   activeScene: Scene | null;
   workButtonDisabled: boolean;
   shopButtonDisabled: boolean;
-  roundNumber: number;
+  monthNumber: number;
   imageNumber: number;
 };
 
+const ButtonsRow = styled(FlexRow)`
+  justify-content: space-around;
+  flex-wrap: nowrap;
+`
+
+const ButtonRow = styled(FlexRow)`
+  justify-content: center;
+  flex-wrap: nowrap;
+`
+
 const SideBar = styled(FlexColumn)`
 	flex-grow: 0;
-  // background-color: ${Colors.Dark};
-  background-color: #fff5ec;
+  background-color: ${Colors.Beige};
 	padding: ${Margins.Large}px;
 `;
 
 const Image = styled.img`
   padding: ${Margins.Medium}px;
-  height: 75px;
+  height: 130px;
 `;
 
 export default class MainPage extends React.Component<{}, State> {
@@ -55,7 +67,7 @@ export default class MainPage extends React.Component<{}, State> {
     activeScene: null,
     workButtonDisabled: false,
     shopButtonDisabled: false,
-    roundNumber: 1,
+    monthNumber: 1,
     imageNumber: 1,
 	};
 
@@ -64,27 +76,26 @@ export default class MainPage extends React.Component<{}, State> {
 			<FlexRow>
 				<SideBar>
           <img alt='' src={window} />
-          <TextLine style={{position:'absolute', marginLeft: '95px', marginTop:'195px'}}>Month: {this.state.roundNumber}</TextLine>
+          <TextLine style={{position:'absolute', marginLeft: '95px', marginTop:'195px'}}>Month: {this.state.monthNumber}</TextLine>
           <br/>
 					<BedroomButton onClick={() => this.setState({ activeScene: Scene.Bedroom })} />
           <br/>
 					<PortfolioButton onClick={() => this.setState({ activeScene: Scene.Portfolio })} />
           <br/>
           <PortfolioSummary portfolio={this.state.portfolio}/>
-          <FlexRow style={{height:'100px'}}>
-            <div style={{height:'100px'}}>
+          <ButtonsRow >
             {this.state.workButtonDisabled 
               ? <Image alt='Go to work to earn money' src={disabledWork} />
               : <Image alt='Go to work to earn money' onClick={this.onClickWork} src={workButton} />}
-            </div>
 
-            <div>
             {this.state.portfolio.items[0].value < 200
               ? <Image alt='Buy some new bedroom decor' src={disabledShop} />
               : <Image alt='Buy some new bedroom decor' onClick={this.onClickShop}  src={shopButton} />}
-            </div>
-          </FlexRow>
-          <BaseButton onClick={this.onClickNextRound} icon={null} color='pink' text="Next Month"/>
+          </ButtonsRow>
+          <hr></hr>
+          <ButtonRow>
+            <BaseButton onClick={this.onClickNextMonth} icon={null} color='#FFBDC9' text="Next Month"/>     
+          </ButtonRow>
 				</SideBar>
 				<FlexColumn>
 					{this.renderScene()}
@@ -96,11 +107,13 @@ export default class MainPage extends React.Component<{}, State> {
 	renderScene = () => {
 		switch (this.state.activeScene) {
 			case null:
-				return null;
+        return <StartScene/>;
 			case Scene.Bedroom:
 				return <BedroomScene imagenumber={this.state.imageNumber} />
 			case Scene.Portfolio:
         return <PortfolioScene onCompleteTransaction={this.onCompleteTransaction}/>
+        case Scene.NewBike:
+        return <NewBikeScene/>
 		}
   };
   
@@ -142,10 +155,11 @@ export default class MainPage extends React.Component<{}, State> {
 
   };
   
-  onClickNextRound = () => {
+  onClickNextMonth = () => {
     this.setState({
-      roundNumber: this.state.roundNumber + 1,
+      monthNumber: this.state.monthNumber + 1,
       workButtonDisabled: false,
+      activeScene: this.state.monthNumber === 2 ? Scene.NewBike: this.state.activeScene,
     });
 	};
 };

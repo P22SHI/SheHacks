@@ -21,7 +21,7 @@ const SmallButtonContainer = styled(FlexRow)<{ color: string }>`
 `;
 
 const ButtonText = styled(TextLine)`
-  font-size: 12px;
+  font-size: 18px;
   font-family: ${FontFamilies.Itim};
 	user-select: none;
 	text-align: center;
