@@ -8,9 +8,9 @@ type Props = {
 
 const PortfolioButton = (props: Props) => (
 	<BaseButton
-		icon={<Feather.Briefcase color={Colors.Icon} size={40} />}
+		icon={<Feather.Briefcase color={Colors.Icon} size={28} />}
 		text='My Portfolio'
-		color='#fef0d5'
+		color='#f9cfcf'
 		onClick={props.onClick}
 	/>
 );

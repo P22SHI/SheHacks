@@ -1,13 +1,11 @@
 import React from 'react';
 import Portfolio from 'src/Models/Portfolio';
 import FlexColumn from 'src/Components/Containers/FlexColumn';
-import FlexRow from 'src/Components/Containers/FlexRow';
 import TextLine from 'src/Components/Texts/TextLine';
 import styled from 'styled-components';
 import { formatAsMoney } from 'src/Utils/moneyUtils';
-import Margins from 'src/Styles/Margins';
 import { FontSizes } from 'src/Styles/Fonts';
-import Colors from 'src/Styles/Colors';
+import LabelContainer from '../Containers/LabelContainer';
 
 type Props = {
 	portfolio: Portfolio;
@@ -18,25 +16,30 @@ const Container = styled(FlexColumn)`
 `;
 
 const Header = styled(TextLine)`
-	font-size: ${FontSizes.SmallHeader}px;
-	color: ${Colors.TextLight};
+  font-size: ${FontSizes.SmallHeader}px;
 `;
 
-const LabelColumn = styled(FlexColumn)`
-	margin-right: ${Margins.Medium}px;
+const DollarContainer = styled(LabelContainer)`
+	box-shadow: 0px 4px 4px 0px #00000040 inset;
+`;
+
+const DollarAmount = styled(TextLine)`
+	text-align: right;
 `;
 
 const PortfolioSummary = (props: Props) => (
 	<Container>
-		<Header>Your Portfolio</Header>
-		<FlexRow>
-			<LabelColumn>
-				{props.portfolio.items.map(pi => <TextLine>{pi.name}:</TextLine>)}
-			</LabelColumn>
-			<FlexColumn>
-				{props.portfolio.items.map(pi => <TextLine>{formatAsMoney(pi.value)}</TextLine>)}
-			</FlexColumn>
-		</FlexRow>
+		{[...props.portfolio.items, props.portfolio.items.reduce(
+			(total, pi) => ({ ...total, value: total.value + pi.value }),
+			{ name: 'Total Net Worth', value: 0 },
+		)].map(pi => (
+			<>
+				<Header>{pi.name}:</Header>
+				<DollarContainer color='#ffe2a9'>
+					<DollarAmount>{formatAsMoney(pi.value)}</DollarAmount>
+				</DollarContainer>
+			</>
+		))}
 	</Container>
 );
 

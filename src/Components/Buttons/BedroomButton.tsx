@@ -8,9 +8,9 @@ type Props = {
 
 const BedroomButton = (props: Props) => (
 	<BaseButton
-		icon={<Feather.Home color={Colors.Icon} size={40} />}
+		icon={<Feather.Home color={Colors.Icon} size={28} />}
 		text='My Bedroom'
-		color='#f9cfcf'
+    color='#f9cfcf'
 		onClick={props.onClick}
 	/>
 );

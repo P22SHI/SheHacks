@@ -1,39 +1,39 @@
 import styled from 'styled-components';
 import TextLine from 'src/Components/Texts/TextLine';
 import { FontFamilies } from 'src/Styles/Fonts';
-import RightCircleArrow from 'src/Assets/Images/RightCircleArrow.svg';
-import LabelContainer from '../Containers/LabelContainer';
 import Margins from 'src/Styles/Margins';
+import FlexRow from '../Containers/FlexRow';
 
 type Props = {
-	icon: React.ReactNode,
+	// icon: React.ReactNode,
 	text: string,
 	color: string;
 	onClick: () => void,
 };
 
-const ButtonContainer = styled(LabelContainer)`
-	box-shadow: 0px 4px 4px 0px #00000040;
+const SmallButtonContainer = styled(FlexRow)<{ color: string }>`
+	height: 35px;
+	border-radius: 5px;
+	background-color: ${props => props.color};
+	flex-grow: 0;
+	justify-content: space-between;
+	padding: ${Margins.Small}px ${Margins.Small}px;
 `;
 
 const ButtonText = styled(TextLine)`
-  font-size: 28px;
+  font-size: 12px;
   font-family: ${FontFamilies.Itim};
 	user-select: none;
 	text-align: center;
-	line-height: .75em;
-	margin-left: ${Margins.Medium}px;
 `;
 
-const BaseButton = (props: Props) => (
-	<ButtonContainer
+const SmallButton = (props: Props) => (
+	<SmallButtonContainer
 		onClick={props.onClick}
 		color={props.color}
 	>
-		{props.icon}
 		<ButtonText>{props.text}</ButtonText>
-		<img alt='' src={RightCircleArrow} />
-	</ButtonContainer>
+	</SmallButtonContainer>
 );
 
-export default BaseButton;
+export default SmallButton;
