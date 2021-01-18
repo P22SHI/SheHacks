@@ -1,6 +1,7 @@
 # BedroomBucks
 A React web game aimed to improve financial literacy amongst girls of age 9-12. Design your bedroom with your favorite decor while learning about investing and personal finance! 
 
+<img src="bedroombucks.png" alt="bedroom" width="1000"/>
 
 ## Try it out!
 1. First install project dependencies:
